@@ -1,0 +1,19 @@
+{
+    "name": "Netflix Watchtime",
+    "description": "View your Netflix watchtime",
+    "version": "1.2.0",
+    "manifest_version": 3,
+    "author": "Gaëtan Hrlt",
+
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": "icon.png"
+    },
+
+    "host_permissions": [
+        "https://*.netflix.com/*"
+    ],
+    "permissions": [
+        "cookies"
+    ]
+}
