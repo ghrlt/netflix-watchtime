@@ -1,12 +1,32 @@
 <html>
-    <body style="width: 20rem; height: 5rem; padding: 1rem; background-color: #141414; color: #fff;">
+    <body>
+        <div id="content" style="display: none;">
+            <img src="netflix.png" style="width: 40%; max-height: 40vh;">
+            <div class="separator">
+                <div></div>
+            </div>
+
+            <p style="padding-top: 2%;">You spent</p>
+            <span id="watchtime"></span>
+            <p>watching content on Netflix</p>
+        </div>
+        
         <div id="loader">
             <div class="netflix-loader"></div>
             <p id="logs">Loading...</p>
         </div>
-        <p id="content"></p>
     </body>
     <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            
+            margin: 0;
+
+            background-color: #141414;
+            color: #fff;
+            text-align: center;
+        }
         #loader {
             display: flex;
             flex-direction: column;
@@ -15,10 +35,30 @@
         }
         #content {
             font-size: 1.2rem;
+            text-align: center;
+
+            font-weight: 700;
+        }
+        #content > #watchtime {
+            font-size: 2.5rem;
+            color: #db0000;
         }
         #logs {
-            padding-top: 4.1rem;
+            padding-top: 80vh;
             text-align: center;
+        }
+
+
+        .separator {
+            width: 100%;
+            height: 1px;
+
+        	display: flex;
+	        justify-content: center;
+        }
+        .separator > div {
+            width: 75%;
+            border-bottom: solid 1px #fff;
         }
         
         
