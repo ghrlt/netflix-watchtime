@@ -11,6 +11,8 @@ function forHumans ( seconds ) {
 
     for (var i = 0, max = levels.length; i < max; i++) {
         if ( levels[i][0] === 0 ) continue;
+        if (i == max-1) returntext += ' and';
+
         returntext += ' ' + levels[i][0] + ' ' + (levels[i][0] === 1 ? levels[i][1].substr(0, levels[i][1].length-1): levels[i][1]);
     };
     return returntext.trim();
@@ -52,8 +54,9 @@ var calculate = function() {
         totalTime = totalTime + obj.bookmark
     }
 
-    document.getElementById("content").innerHTML = `You spent ${forHumans(totalTime)} of your life on Netflix!` 
+    document.getElementById("watchtime").innerHTML = forHumans(totalTime); 
     document.getElementById("loader").style.display = "none";
+    document.getElementById("content").style.display = "block";
 
 }
 
