@@ -5,6 +5,12 @@
     "manifest_version": 3,
     "author": "Gaëtan Hrlt",
 
+    "icons": {
+        "16": "medias/icon16.png",
+        "48": "medias/icon48.png",
+        "128": "medias/icon128.png"
+    },
+
     "action": {},
 
     "background": {

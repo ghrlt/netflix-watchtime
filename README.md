@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/ghrlt/netflix-watchtime/master/banner.png" alt="A banner featuring the extension logo">
+<img src="https://raw.githubusercontent.com/ghrlt/netflix-watchtime/master/medias/banner.png" alt="A banner featuring the extension logo">
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 ![](https://komarev.com/ghpvc/?username=ghrlt-netflix-watchtime&color=brightgreen&label=Repository%20views)  
