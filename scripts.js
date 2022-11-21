@@ -64,7 +64,7 @@ var calculate = function(allViewed) {
         "0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0,
         "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0,
         "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0,
-        "19": 0, "20": 0, "21": 0, "22": 0, "23": 0, "24": 0
+        "19": 0, "20": 0, "21": 0, "22": 0, "23": 0
     }
 
     isMovie = 0
@@ -146,7 +146,10 @@ var calculate = function(allViewed) {
                 },
                 title: {
                     display: true,
-                    text: 'Recent watchtime activity'
+                    text: 'Recent watchtime activity',
+                    font: {
+                        size: 18
+                    }
                 },
                 tooltip: {
                     callbacks: {
@@ -192,7 +195,10 @@ var calculate = function(allViewed) {
                 },
                 title: {
                     display: true,
-                    text: 'Content Type proportion'
+                    text: 'Content Type proportion',
+                    font: {
+                        size: 18
+                    }
                 },
                 tooltip: {
                     callbacks: {
@@ -208,10 +214,10 @@ var calculate = function(allViewed) {
     /** Generate bar for watching per hour **/
     const ctx3 = document.getElementById('hourproportion').getContext("2d");
     var data3 = {
-        labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+        labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23',],
         datasets: [{
             label: 'Hour proportion',
-            data: [dayHours["0"], dayHours["1"], dayHours["2"], dayHours["3"], dayHours["4"], dayHours["5"], dayHours["6"], dayHours["7"], dayHours["8"], dayHours["9"], dayHours["10"], dayHours["11"], dayHours["12"], dayHours["13"], dayHours["14"], dayHours["15"], dayHours["16"], dayHours["17"], dayHours["18"], dayHours["19"], dayHours["20"], dayHours["21"], dayHours["22"], dayHours["23"], dayHours["24"]], // Find a way to get the values from the object
+            data: [dayHours["0"], dayHours["1"], dayHours["2"], dayHours["3"], dayHours["4"], dayHours["5"], dayHours["6"], dayHours["7"], dayHours["8"], dayHours["9"], dayHours["10"], dayHours["11"], dayHours["12"], dayHours["13"], dayHours["14"], dayHours["15"], dayHours["16"], dayHours["17"], dayHours["18"], dayHours["19"], dayHours["20"], dayHours["21"], dayHours["22"], dayHours["23"]], // Find a way to get the values from the object
             backgroundColor: [
                 'rgba(255, 99, 132, 0.7)',
                 'rgba(54, 162, 235, 0.7)',
@@ -238,7 +244,10 @@ var calculate = function(allViewed) {
                 },
                 title: {
                     display: true,
-                    text: 'Watching hours proportion'
+                    text: 'Watching hours proportion',
+                    font: {
+                        size: 18
+                    }
                 },
                 tooltip: {
                     enabled: false
