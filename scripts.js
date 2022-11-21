@@ -146,7 +146,7 @@ var calculate = function(allViewed) {
                 },
                 title: {
                     display: true,
-                    text: 'Time proportion'
+                    text: 'Recent watchtime activity'
                 },
                 tooltip: {
                     callbacks: {
@@ -192,7 +192,7 @@ var calculate = function(allViewed) {
                 },
                 title: {
                     display: true,
-                    text: 'Content proportion'
+                    text: 'Content Type proportion'
                 },
                 tooltip: {
                     callbacks: {
