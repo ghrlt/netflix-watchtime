@@ -1,4 +1,11 @@
 <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Netflix Watchtime / By ghrlt</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>	
+
     <body>
         <div id="content" style="display: none;">
             <img src="medias/netflix.png" style="width: 40%; max-height: 40vh;">
@@ -9,6 +16,13 @@
             <p style="padding-top: 2%;">You spent</p>
             <span id="watchtime"></span>
             <p>watching content on Netflix</p>
+
+            <div style="position: absolute; bottom: 2rem; width: 100%; display: flex; justify-content: space-around;">
+                <a target="_blank" class="twitter-share-button" id="twitter-share-btn">
+                    <i></i>
+                    Share your results!
+                </a>
+            </div>
         </div>
         
         <div id="loader">
@@ -16,92 +30,6 @@
             <p id="logs">Loading...</p>
         </div>
     </body>
-    <style>
-        body {
-            width: 100vw;
-            height: 100vh;
-            
-            margin: 0;
-
-            background-color: #141414;
-            color: #fff;
-            text-align: center;
-        }
-        #loader {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-        }
-        #content {
-            font-size: 1.2rem;
-            text-align: center;
-
-            font-weight: 700;
-        }
-        #content > #watchtime {
-            font-size: 2.5rem;
-            color: #db0000;
-        }
-        #logs {
-            padding-top: 80vh;
-            text-align: center;
-        }
-
-
-        .separator {
-            width: 100%;
-            height: 1px;
-
-        	display: flex;
-	        justify-content: center;
-        }
-        .separator > div {
-            width: 75%;
-            border-bottom: solid 1px #fff;
-        }
-        
-        
-        @-webkit-keyframes load_spinner {
-            0% {
-                transform:rotate(0deg) /*!rtl:ignore*/
-            }
-            50% {
-                transform:rotate(180deg) /*!rtl:ignore*/
-            }
-            to {
-                transform:rotate(1turn) /*!rtl:ignore*/
-            }
-        }
-        @keyframes load_spinner{
-            0% {
-                transform:rotate(0deg) /*!rtl:ignore*/
-            }
-            50% {
-                transform:rotate(180deg) /*!rtl:ignore*/
-            }
-            to {
-                transform:rotate(1turn) /*!rtl:ignore*/
-            }
-        }
-        .netflix-loader {
-            height: 4rem;
-            width: 4rem;
-
-            -webkit-animation: load_spinner .9s linear infinite;
-            animation: load_spinner .9s linear infinite;
-            background-image: url(https://assets.nflxext.com/en_us/pages/wiplayer/site-spinner.png);
-            background-repeat: no-repeat;
-            background-size: 100%;
-            bottom: 1px;
-            left: 1px;
-            margin: auto;
-            position: absolute;
-            right: 1px;
-            text-align: center;
-            top: 1px;
-        }
-
-    </style>
+    <script src="countUp.umd.js"></script>
     <script src="scripts.js" ></script>
-</html>
+    </html>
