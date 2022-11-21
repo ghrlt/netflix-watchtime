@@ -14,10 +14,24 @@
             </div>
 
             <p style="padding-top: 2%;">You spent</p>
-            <span id="watchtime"></span>
+            <span id="total-stat" class="watchtime"></span>
             <p>watching content on Netflix</p>
 
-            <div style="position: absolute; bottom: 2rem; width: 100%; display: flex; justify-content: space-around;">
+            <div style="padding-top: 5rem;"></div>
+
+            <div id="stats">
+                <div class="stat">
+                    <canvas id="timeproportion"></canvas>
+                </div>
+                <div class="stat">
+                    <canvas id="hourproportion"></canvas>
+                </div>
+                <div class="stat">
+                    <canvas id="contentproportion"></canvas>
+                </div>
+            </div>
+
+            <div style="position: fixed; bottom: 2rem; width: 100%; display: flex; justify-content: space-around;">
                 <a target="_blank" class="twitter-share-button" id="twitter-share-btn">
                     <i></i>
                     Share your results!
@@ -31,5 +45,6 @@
         </div>
     </body>
     <script src="countUp.umd.js"></script>
+    <script src="chart.js" ></script>
     <script src="scripts.js" ></script>
     </html>

@@ -1,6 +1,6 @@
 body {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     
     margin: 0;
 
@@ -14,11 +14,23 @@ body {
     text-align: center;
 
     font-weight: 700;
+    min-height: inherit;
 }
-#content > #watchtime {
-    font-size: 2.5rem;
+.watchtime {
     color: #db0000;
 }
+#total-stat {font-size: 2.5rem;}
+
+#stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.stat {
+    width: 30%;
+    height: auto;
+}
+
 
 #logs {
     padding-top: 80vh;
