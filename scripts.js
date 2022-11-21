@@ -22,7 +22,11 @@ var logsSmth = function(text) {
     document.getElementById("logs").innerHTML = text
 }
 
-var fetchViewingActivity = function(page, pageSize) {
+
+
+
+var fetchViewingActivity = function(page, pageSize, allViewed=[]) {
+
     logsSmth("Fetching page " + page + " of your Netflix history...")
     fetch(`https://netflix.com/api/shakti/mre/viewingactivity?pg=${page}&pgSize=${pageSize}`)
         .then((resp) => {
@@ -36,9 +40,9 @@ var fetchViewingActivity = function(page, pageSize) {
         .then((data) => {
             if (data.viewedItems.length !== 0) {
                 Array.prototype.push.apply(allViewed, data.viewedItems);
-                fetchViewingActivity(page+1, pageSize);
+                fetchViewingActivity(page+1, pageSize, allViewed);
             } else {
-                calculate();
+                calculate(allViewed);
             }
         })
         .catch((err) => {
@@ -46,7 +50,8 @@ var fetchViewingActivity = function(page, pageSize) {
         })
 }
 
-var calculate = function() {
+
+var calculate = function(allViewed) {
     logsSmth(`Working on ${allViewed.length} watched content.`)
 
     totalTime = 0
@@ -54,13 +59,15 @@ var calculate = function() {
         totalTime = totalTime + obj.bookmark
     }
 
-    document.getElementById("watchtime").innerHTML = forHumans(totalTime); 
+    /* Use modified version! || Too violent to be able to use */
+    //var animationCountUp = new countUp.CountUp("watchtime", totalTime, forHumans, {duration: 10});
+    //animationCountUp.start();
+    document.getElementById("watchtime").innerHTML = forHumans(totalTime)
+    document.getElementById("twitter-share-btn").setAttribute("href", `https://twitter.com/intent/tweet?text=I%20spent%20${forHumans(totalTime)}%20on%20Netflix!%0a%0aWanna%20discover%20how%20much%20time%20you%20spent?%0aDownload%20this%20free%20chrome%20extension%20⬇️&url=https://apps.ghr.lt/netflix-watchtime-extension`)
+
     document.getElementById("loader").style.display = "none";
     document.getElementById("content").style.display = "block";
 
 }
 
-var allViewed = []
-
-
-fetchViewingActivity(0, 20)
+fetchViewingActivity(0, 20);
