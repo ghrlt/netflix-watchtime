@@ -14,7 +14,7 @@ To implement: Analysis, Requests optimization, all users watchtime percentage
 
 ## Installation
 
-~~Install via the [Chrome Web Store](#)~~
+Install via the [Chrome Web Store](https://chrome.google.com/webstore/detail/netflix-watchtime/pncajjondflmmdmidcgcahcabjhmabfc)
 
 Install from source:
 - Download the repo -> [here](https://github.com/ghrlt/netflix-watchtime/archive/refs/heads/master.zip)
