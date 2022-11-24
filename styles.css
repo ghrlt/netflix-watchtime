@@ -37,6 +37,11 @@ body {
     text-align: center;
 }
 
+#logs a {
+    color: inherit;
+    font-weight: bolder;
+}
+
 
 .separator {
     width: 100%;

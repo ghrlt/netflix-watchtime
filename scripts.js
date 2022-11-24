@@ -1,5 +1,5 @@
 // https://stackoverflow.com/a/34270811
-function forHumans ( seconds ) {
+var forHumans = function(seconds) {
     var levels = [
         [Math.floor(seconds / 31536000), 'years'],
         [Math.floor((seconds % 31536000) / 86400), 'days'],
@@ -16,14 +16,11 @@ function forHumans ( seconds ) {
         returntext += ' ' + levels[i][0] + ' ' + (levels[i][0] === 1 ? levels[i][1].substr(0, levels[i][1].length-1): levels[i][1]);
     };
     return returntext.trim();
-}
+};
 
 var logsSmth = function(text) {
-    document.getElementById("logs").innerHTML = text
-}
-
-
-
+    document.getElementById("logs").innerHTML = text;
+};
 
 var fetchViewingActivity = function(page, pageSize, allViewed=[], devMode=false) {
     logsSmth("Fetching page " + page + " of your Netflix history...")
@@ -31,10 +28,10 @@ var fetchViewingActivity = function(page, pageSize, allViewed=[], devMode=false)
     fetch(`https://www.netflix.com/shakti/mre/viewingactivity?pgSize=${pageSize}&pg=${page}`)
         .then((resp) => {
             if (resp.status === 200) {
-                return resp.json()
+                return resp.json();
             } else {
-                logsSmth("Error fetching your Netflix history.<br>Please check that you are logged in and try again later.")
-                throw new Error("Code " + resp.status + " while fetching Netflix history.")
+                logsSmth("Error fetching your Netflix history.<br>Please check that you are <a href='https://netflix.com/browse' target='_blank'>logged in</a> and try again later.");
+                throw new Error("Code " + resp.status + " while fetching Netflix history.");
             }
         })
         .then((data) => {
@@ -46,9 +43,10 @@ var fetchViewingActivity = function(page, pageSize, allViewed=[], devMode=false)
             }
         })
         .catch((err) => {
-            console.error(err)
-        })
-}
+            logsSmth("Something bad happened while fetching your Netflix history.<br>Check the logs for more informations.");
+            console.error(err);
+        });
+};
 
 
 var calculate = function(allViewed) {
@@ -108,9 +106,12 @@ var calculate = function(allViewed) {
 
 
 
-    /* Use modified version! || Too violent to be able to use */
-    //var animationCountUp = new countUp.CountUp("watchtime", totalTime, forHumans, {duration: 10});
-    //animationCountUp.start();
+    /***
+     * Use modified version!
+     * Too violent to be able to use
+    var animationCountUp = new countUp.CountUp("watchtime", totalTime, forHumans, {duration: 10});
+    animationCountUp.start();
+    ***/
     document.getElementById("total-stat").innerHTML = forHumans(totalTime)
 
     /** Generate pie for watching period **/
@@ -257,7 +258,6 @@ var calculate = function(allViewed) {
     });
 
 
-
     document.getElementById("twitter-share-btn").setAttribute("href", `https://twitter.com/intent/tweet?text=I%20spent%20${forHumans(totalTime)}%20on%20Netflix!%0a%0aWanna%20discover%20how%20much%20time%20you%20spent?%0aDownload%20this%20free%20chrome%20extension%20⬇️&url=https://apps.ghr.lt/netflix-watchtime-extension`)
 
     document.getElementById("loader").style.display = "none";
@@ -265,4 +265,4 @@ var calculate = function(allViewed) {
 
 }
 
-fetchViewingActivity(0, 20, [], false);
+fetchViewingActivity(0, 20, [], true);
