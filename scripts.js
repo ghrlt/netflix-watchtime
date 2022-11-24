@@ -265,4 +265,4 @@ var calculate = function(allViewed) {
 
 }
 
-fetchViewingActivity(0, 20, [], true);
+fetchViewingActivity(0, 20, [], false);
