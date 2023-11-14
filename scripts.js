@@ -1,17 +1,17 @@
 // https://stackoverflow.com/a/34270811
 var forHumans = function(seconds) {
     var levels = [
-        [Math.floor(seconds / 31536000), 'years'],
-        [Math.floor((seconds % 31536000) / 86400), 'days'],
-        [Math.floor(((seconds % 31536000) % 86400) / 3600), 'hours'],
-        [Math.floor((((seconds % 31536000) % 86400) % 3600) / 60), 'minutes'],
-        [(((seconds % 31536000) % 86400) % 3600) % 60, 'seconds'],
+        [Math.floor(seconds / 31536000), chrome.i18n.getMessage('years')],
+        [Math.floor((seconds % 31536000) / 86400), chrome.i18n.getMessage('days')],
+        [Math.floor(((seconds % 31536000) % 86400) / 3600), chrome.i18n.getMessage('hours')],
+        [Math.floor((((seconds % 31536000) % 86400) % 3600) / 60), chrome.i18n.getMessage('minutes')],
+        [(((seconds % 31536000) % 86400) % 3600) % 60, chrome.i18n.getMessage('seconds')],
     ];
     var returntext = '';
 
     for (var i = 0, max = levels.length; i < max; i++) {
         if ( levels[i][0] === 0 ) continue;
-        if (i == max-1) returntext += ' and';
+        if (i == max-1) returntext += ' ' + chrome.i18n.getMessage('and');
 
         returntext += ' ' + levels[i][0] + ' ' + (levels[i][0] === 1 ? levels[i][1].substr(0, levels[i][1].length-1): levels[i][1]);
     };
@@ -23,34 +23,35 @@ var logsSmth = function(text) {
 };
 
 var fetchViewingActivity = function(page, pageSize, allViewed=[], devMode=false) {
-    logsSmth("Fetching page " + page + " of your Netflix history...")
+    logsSmth(chrome.i18n.getMessage('fetchingPage', page.toString()));
 
     fetch(`https://www.netflix.com/shakti/mre/viewingactivity?pgSize=${pageSize}&pg=${page}`)
         .then((resp) => {
             if (resp.status === 200) {
                 return resp.json();
             } else {
-                logsSmth("Error fetching your Netflix history.<br>Please check that you are <a href='https://netflix.com/browse' target='_blank'>logged in</a> and try again later.");
+                logsSmth(chrome.i18n.getMessage('fetchingErrorCheckLoggedIn', options={escapeLt: false}));
                 throw new Error("Code " + resp.status + " while fetching Netflix history.");
             }
         })
         .then((data) => {
-            if ((data.viewedItems.length !== 0) && !(devMode && page >= 5)) { // devMode: only fetch 5 pages
-                Array.prototype.push.apply(allViewed, data.viewedItems);
-                fetchViewingActivity(page+1, pageSize, allViewed, devMode);
-            } else {
-                calculate(allViewed);
+            try {
+                if ((data.viewedItems.length !== 0) && !(devMode && page >= 5)) { // devMode: only fetch 5 pages
+                    Array.prototype.push.apply(allViewed, data.viewedItems);
+                    fetchViewingActivity(page+1, pageSize, allViewed, devMode);
+                } else {
+                    calculate(allViewed);
+                }
+            } catch (err) {
+                logsSmth(chrome.i18n.getMessage('somethingBadHappened', options={escapeLt: false}));
+                throw new Error(err);
             }
-        })
-        .catch((err) => {
-            logsSmth("Something bad happened while fetching your Netflix history.<br>Check the logs for more informations.");
-            console.error(err);
         });
 };
 
 
 var calculate = function(allViewed) {
-    logsSmth(`Working on ${allViewed.length} watched content.`)
+    logsSmth(chrome.i18n.getMessage('calculating', allViewed.length.toString()));
 
     totalTime = 0
     today = 0
@@ -117,7 +118,7 @@ var calculate = function(allViewed) {
     /** Generate pie for watching period **/
     const ctx = document.getElementById('timeproportion').getContext("2d");
     var data = {
-        labels: ['Today', 'This month', 'This year', 'Before'],
+        labels: [chrome.i18n.getMessage('today'), chrome.i18n.getMessage('thisMonth'), chrome.i18n.getMessage('thisYear'), chrome.i18n.getMessage('before')],
         datasets: [{
             label: 'Time proportion',
             data: [today, month, year, before],
@@ -147,7 +148,7 @@ var calculate = function(allViewed) {
                 },
                 title: {
                     display: true,
-                    text: 'Recent watchtime activity',
+                    text: chrome.i18n.getMessage("recentWatchtimeProportion"),
                     font: {
                         size: 18
                     }
@@ -166,7 +167,7 @@ var calculate = function(allViewed) {
     /** Generate pie for movie/series count **/
     const ctx2 = document.getElementById('contentproportion').getContext("2d");
     var data2 = {
-        labels: ['Movies', 'Series (episodes)'],
+        labels: [chrome.i18n.getMessage('movies'), chrome.i18n.getMessage('seriesEpisode')],
         datasets: [{
             label: 'Content proportion',
             data: [isMovie, isSeries],
@@ -196,7 +197,7 @@ var calculate = function(allViewed) {
                 },
                 title: {
                     display: true,
-                    text: 'Content Type proportion',
+                    text: chrome.i18n.getMessage("contentProportion"),
                     font: {
                         size: 18
                     }
@@ -245,7 +246,7 @@ var calculate = function(allViewed) {
                 },
                 title: {
                     display: true,
-                    text: 'Watching hours proportion',
+                    text: chrome.i18n.getMessage("watchingHoursProportion"),
                     font: {
                         size: 18
                     }
@@ -258,11 +259,19 @@ var calculate = function(allViewed) {
     });
 
 
-    document.getElementById("twitter-share-btn").setAttribute("href", `https://twitter.com/intent/tweet?text=I%20spent%20${forHumans(totalTime)}%20on%20Netflix!%0a%0aWanna%20discover%20how%20much%20time%20you%20spent?%0aDownload%20this%20free%20chrome%20extension%20⬇️&url=https://apps.ghr.lt/netflix-watchtime-extension`)
+
+    document.getElementById("twitter-share-btn").setAttribute("href", `https://twitter.com/intent/tweet?text=${chrome.i18n.getMessage("shareMessage", forHumans(totalTime))}&url=https://apps.ghr.lt/netflix-watchtime-extension`)
 
     document.getElementById("loader").style.display = "none";
+
+    let texts = document.getElementsByClassName("text");
+    for (let text of texts) {
+        let key = text.getAttribute("data-text-key");
+        text.innerText = chrome.i18n.getMessage(key);
+    }
+
     document.getElementById("content").style.display = "block";
 
 }
 
-fetchViewingActivity(0, 20, [], false);
+fetchViewingActivity(0, 20, [], true);

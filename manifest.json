@@ -11,6 +11,8 @@
         "128": "medias/icon128.png"
     },
 
+    "default_locale": "en",
+
     "action": {},
 
     "background": {

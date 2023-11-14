@@ -1,0 +1,103 @@
+{
+    "youSpent": {
+        "message": "You spent"
+    },
+    "watchingNetflixContent": {
+        "message": "watching content on Netflix"
+    },
+    "shareResults": {
+        "message": "Share your results!"
+    },
+    "shareMessage": {
+        "message": "I%20spent%20$timeSpent$%20on%20Netflix!%0a%0aWanna%20discover%20how%20much%20time%20you%20spent?%0aDownload%20this%20free%20chrome%20extension%20⬇️",
+        "description": "Text placeholder for X (Twitter) sharing button",
+        "placeholders": {
+            "timeSpent": {
+                "content": "$1",
+                "example": "1 hour"
+            }
+        }
+    },
+    "loading": {
+        "message": "Loading..."
+    },
+    "watchingHoursProportion": {
+        "message": "Watching hours proportion",
+        "description": "Charts title"
+    },
+    "contentProportion": {
+        "message": "Content Type proportion",
+        "description": "Charts title"
+    },
+    "movies": {
+        "message": "Movies"
+    },
+    "series": {
+        "message": "Series"
+    },
+    "seriesEpisode": {
+        "message": "Series (Episode)"
+    },
+    "recentWatchtimeProportion": {
+        "message": "Recent watchtime activity",
+        "description": "Charts title"
+    },
+    "today": {
+        "message": "Today"
+    },
+    "thisMonth": {
+        "message": "This month"
+    },
+    "thisYear": {
+        "message": "This year"
+    },
+    "before": {
+        "message": "Before"
+    },
+    "years": {
+        "message": "years"
+    },
+    "months": {
+        "message": "months"
+    },
+    "days": {
+        "message": "days"
+    },
+    "hours": {
+        "message": "hours"
+    },
+    "minutes": {
+        "message": "minutes"
+    },
+    "seconds": {
+        "message": "seconds"
+    },
+    "and": {
+        "message": "and"
+    },
+    "fetchingPage": {
+        "message": "Fetching page $page$ of your Netflix history...",
+        "description": "Subtitle displayed while fetching Netflix history pages",
+        "placeholders": {
+            "page": {
+                "content": "$1",
+                "example": "42"
+            }
+        }
+    },
+    "fetchingErrorCheckLoggedIn": {
+        "message": "Error fetching your Netflix history.<br>Please check that you are <a href='https://netflix.com/browse' target='_blank'>logged in</a> and try again later."
+    },
+    "somethingBadHappened": {
+        "message": "Something bad happened while fetching your Netflix history.<br>Check the logs for more informations."
+    },
+    "calculating": {
+        "message": "Working on $allViewedLength$ watched content.",
+        "placeholders": {
+            "allViewedLength": {
+                "content": "$1",
+                "example": "420"
+            }
+        }
+    }
+}
