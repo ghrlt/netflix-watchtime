@@ -55,6 +55,9 @@ body {
     border-bottom: solid 1px #fff;
 }
 
+.stop-animations, .stop-animations * {
+    animation-play-state: paused!important;
+}
 
 @-webkit-keyframes load_spinner {
     0% {

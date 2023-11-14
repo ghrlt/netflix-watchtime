@@ -31,6 +31,8 @@ var fetchViewingActivity = function(page, pageSize, allViewed=[], devMode=false)
                 return resp.json();
             } else {
                 logsSmth(chrome.i18n.getMessage('fetchingErrorCheckLoggedIn', options={escapeLt: false}));
+                //~ stop loader spin animation
+                document.getElementById("loader").classList.add("stop-animations");
                 throw new Error("Code " + resp.status + " while fetching Netflix history.");
             }
         })
@@ -44,6 +46,8 @@ var fetchViewingActivity = function(page, pageSize, allViewed=[], devMode=false)
                 }
             } catch (err) {
                 logsSmth(chrome.i18n.getMessage('somethingBadHappened', options={escapeLt: false}));
+                //~ stop loader spin animation
+                document.getElementById("loader").classList.add("stop-animations");
                 throw new Error(err);
             }
         });
@@ -274,4 +278,4 @@ var calculate = function(allViewed) {
 
 }
 
-fetchViewingActivity(0, 20, [], true);
+fetchViewingActivity(0, 20, [], false);
