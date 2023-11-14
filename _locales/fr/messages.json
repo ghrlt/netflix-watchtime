@@ -1,0 +1,98 @@
+{
+    "youSpent": {
+        "message": "Vous avez passé"
+    },
+    "watchingNetflixContent": {
+        "message": "sur Netflix"
+    },
+    "shareResults": {
+        "message": "Partagez vos résultats !"
+    },
+    "shareMessage": {
+        "message": "J'ai%20passé%20$timeSpent$%20sur%20Netflix%20!%0a%0aToi%20aussi%20tu%20veux%20savoir%20combien%20de%20temps%20tu%20as%20passé%20sur%20Netflix%20?%0aTélécharge%20cette%20extension%20chrome%20gratuitement%20⬇️",
+        "placeholders": {
+            "timeSpent": {
+                "content": "$1",
+                "example": "1 hour"
+            }
+        }
+    },
+    "loading": {
+        "message": "Chargement..."
+    },
+    "watchingHoursProportion": {
+        "message": "Horaires de visionnage"
+    },
+    "contentProportion": {
+        "message": "Type de contenu"
+    },
+    "movies": {
+        "message": "Films"
+    },
+    "series": {
+        "message": "Séries"
+    },
+    "seriesEpisode": {
+        "message": "Séries (Episodes)"
+    },
+    "recentWatchtimeProportion": {
+        "message": "Activité récente"
+    },
+    "today": {
+        "message": "Aujourd'hui"
+    },
+    "thisMonth": {
+        "message": "Ce mois-ci"
+    },
+    "thisYear": {
+        "message": "Cette année"
+    },
+    "before": {
+        "message": "Avant"
+    },
+    "years": {
+        "message": "années"
+    },
+    "months": {
+        "message": "mois"
+    },
+    "days": {
+        "message": "jours"
+    },
+    "hours": {
+        "message": "heures"
+    },
+    "minutes": {
+        "message": "minutes"
+    },
+    "seconds": {
+        "message": "secondes"
+    },
+    "and": {
+        "message": "et"
+    },
+    "fetchingPage": {
+        "message": "Obtention de la page $page$ de votre historique Netflix...",
+        "placeholders": {
+            "page": {
+                "content": "$1",
+                "example": "42"
+            }
+        }
+    },
+    "fetchingErrorCheckLoggedIn": {
+        "message": "Une erreur est survenue lors de la récupération de votre historique Netflix.<br>Merci de vérifier que vosu êtes bien <a href='https://netflix.com/browse' target='_blank'>connecté à votre compte</a>, puis réessayez."
+    },
+    "somethingBadHappened": {
+        "message": "Quelque chose s'est mal passé lors de la récupération de votre historique Netflix.<br>Regardez les logs pour plus d'informations."
+    },
+    "calculating": {
+        "message": "Calcul en cours sur $allViewedLength$ éléments.",
+        "placeholders": {
+            "allViewedLength": {
+                "content": "$1",
+                "example": "420"
+            }
+        }
+    }
+}
