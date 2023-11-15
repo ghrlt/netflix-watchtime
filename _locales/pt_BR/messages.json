@@ -22,7 +22,7 @@
         "message": "Carregando..."
     },
     "watchingHoursProportion": {
-        "message": "Tempos de visualização",
+        "message": "Horários de visualização",
         "description": "Charts title"
     },
     "contentProportion": {
@@ -76,7 +76,7 @@
         "message": "e"
     },
     "fetchingPage": {
-        "message": "Obtendo a página $page$ de seu histórico da Netflix...",
+        "message": "Buscando a página $page$ de seu histórico da Netflix...",
         "description": "Subtitle displayed while fetching Netflix history pages",
         "placeholders": {
             "page": {
