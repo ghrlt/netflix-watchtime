@@ -1,0 +1,103 @@
+{
+    "youSpent": {
+        "message": "Passaste"
+    },
+    "watchingNetflixContent": {
+        "message": "a ver conteúdos na Netflix"
+    },
+    "shareResults": {
+        "message": "Partilha os teus resultados!"
+    },
+    "shareMessage": {
+        "message": "Passei%20$timeSpent$%20na%20Netflix!%0a%0aTu%20também%20queres%20saber%20quanto%20tempo%20passaste%20a%20ver%20Netflix?%0aDescarrega%20esta%20extensão%20chrome%20gratuitamente%20⬇️",
+        "description": "Text placeholder for X (Twitter) sharing button",
+        "placeholders": {
+            "timeSpent": {
+                "content": "$1",
+                "example": "1 hour"
+            }
+        }
+    },
+    "loading": {
+        "message": "A carregar..."
+    },
+    "watchingHoursProportion": {
+        "message": "Tempos de visualização",
+        "description": "Charts title"
+    },
+    "contentProportion": {
+        "message": "Tipo de conteúdo",
+        "description": "Charts title"
+    },
+    "movies": {
+        "message": "Filmes"
+    },
+    "series": {
+        "message": "Séries"
+    },
+    "seriesEpisode": {
+        "message": "Séries (Episódios)"
+    },
+    "recentWatchtimeProportion": {
+        "message": "Atividade recente",
+        "description": "Charts title"
+    },
+    "today": {
+        "message": "Hoje"
+    },
+    "thisMonth": {
+        "message": "Este mês"
+    },
+    "thisYear": {
+        "message": "Este ano"
+    },
+    "before": {
+        "message": "Antes"
+    },
+    "years": {
+        "message": "anos"
+    },
+    "months": {
+        "message": "meses"
+    },
+    "days": {
+        "message": "dias"
+    },
+    "hours": {
+        "message": "horas"
+    },
+    "minutes": {
+        "message": "minutos"
+    },
+    "seconds": {
+        "message": "segundos"
+    },
+    "and": {
+        "message": "e"
+    },
+    "fetchingPage": {
+        "message": "A obter a página $page$ do teu histórico Netflix...",
+        "description": "Subtitle displayed while fetching Netflix history pages",
+        "placeholders": {
+            "page": {
+                "content": "$1",
+                "example": "42"
+            }
+        }
+    },
+    "fetchingErrorCheckLoggedIn": {
+        "message": "Ocorreu um erro ao tentar obter o teu histórico da Netflix.<br>Verifica se estás corretamente <a href='https://netflix.com/browse' target='_blank'>conectado à tua conta</a> e depois tenta novamente."
+    },
+    "somethingBadHappened": {
+        "message": "Algo correu mal ao tentar obter o teu histórico da Netflix.<br>Consulta os registos para obteres mais informações."
+    },
+    "calculating": {
+        "message": "Cálculo em curso sobre $allViewedLength$ conteúdos vistos",
+        "placeholders": {
+            "allViewedLength": {
+                "content": "$1",
+                "example": "420"
+            }
+        }
+    }
+}
