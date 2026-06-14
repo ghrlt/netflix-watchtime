@@ -1,98 +1,68 @@
 {
-    "youSpent": {
-        "message": "Vous avez passé"
+    "watchtime": { "message": "Temps de visionnage" },
+    "loading": { "message": "Chargement..." },
+    "openingNetflix": { "message": "Ouverture de Netflix..." },
+    "readingHistory": { "message": "Lecture de votre historique..." },
+    "retry": { "message": "Réessayer" },
+
+    "errorTitle": { "message": "Une erreur est survenue" },
+    "errorGeneric": { "message": "Impossible de lire votre historique Netflix. Veuillez réessayer." },
+    "notLoggedInTitle": { "message": "Vous n'êtes pas connecté" },
+    "notLoggedInMsg": { "message": "Connectez-vous à Netflix dans ce navigateur, puis réessayez." },
+    "apiChangedTitle": { "message": "Netflix a modifié son API" },
+    "apiChangedMsg": { "message": "Netflix a mis à jour son API et l'extension doit être mise à jour. Vérifiez si une nouvelle version est disponible." },
+    "emptyTitle": { "message": "Aucun historique" },
+    "emptyMsg": { "message": "Ce profil Netflix n'a aucune activité de visionnage." },
+
+    "estimatedTotal": { "message": "Temps de visionnage estimé" },
+    "estimateTag": { "message": "estimation — Netflix ne fournit plus les durées exactes" },
+    "heroSub": {
+        "message": "sur $count$ titres depuis $date$",
+        "placeholders": {
+            "count": { "content": "$1", "example": "1240" },
+            "date": { "content": "$2", "example": "janv. 2019" }
+        }
     },
-    "watchingNetflixContent": {
-        "message": "sur Netflix"
+    "estimateNote": {
+        "message": "Netflix ne communique plus la durée réellement regardée pour chaque titre : le temps total est donc estimé à partir du nombre de titres. Ajustez les moyennes par titre ci-dessous selon vos habitudes."
     },
-    "shareResults": {
-        "message": "Partagez vos résultats !"
-    },
+    "avgEpisode": { "message": "Moy. par épisode" },
+    "avgMovie": { "message": "Moy. par film" },
+
+    "titlesWatched": { "message": "Titres regardés" },
+    "movies": { "message": "Films" },
+    "episodes": { "message": "Épisodes" },
+    "uniqueSeries": { "message": "Séries regardées" },
+    "daysActive": { "message": "Jours actifs" },
+    "busiestDay": { "message": "Record sur un jour" },
+
+    "contentProportion": { "message": "Films vs Épisodes" },
+    "periodProportion": { "message": "Quand vous regardez" },
+    "activityTimeline": { "message": "Activité dans le temps" },
+    "byDayOfWeek": { "message": "Par jour de la semaine" },
+    "topSeries": { "message": "Séries les plus vues" },
+    "noSeries": { "message": "Aucune série détectée" },
+    "episodeShort": { "message": "ép" },
+    "episodesShort": { "message": "ép" },
+
+    "thisWeek": { "message": "Cette semaine" },
+    "thisMonth": { "message": "Ce mois-ci" },
+    "thisYear": { "message": "Cette année" },
+    "older": { "message": "Avant" },
+
+    "day": { "message": "jour" },
+    "days": { "message": "jours" },
+    "hour": { "message": "heure" },
+    "hours": { "message": "heures" },
+    "minute": { "message": "minute" },
+    "minutes": { "message": "minutes" },
+
+    "shareResults": { "message": "Partagez vos résultats" },
     "shareMessage": {
-        "message": "J'ai%20passé%20$timeSpent$%20sur%20Netflix%20!%0a%0aToi%20aussi%20tu%20veux%20savoir%20combien%20de%20temps%20tu%20as%20passé%20sur%20Netflix%20?%0aTélécharge%20cette%20extension%20chrome%20gratuitement%20⬇️",
+        "message": "J'ai passé $timeSpent$ à regarder Netflix ! Découvrez le vôtre avec l'extension gratuite Netflix Watchtime ⬇️",
         "placeholders": {
-            "timeSpent": {
-                "content": "$1",
-                "example": "1 hour"
-            }
+            "timeSpent": { "content": "$1", "example": "12 jours 4 heures" }
         }
     },
-    "loading": {
-        "message": "Chargement..."
-    },
-    "watchingHoursProportion": {
-        "message": "Horaires de visionnage"
-    },
-    "contentProportion": {
-        "message": "Type de contenu"
-    },
-    "movies": {
-        "message": "Films"
-    },
-    "series": {
-        "message": "Séries"
-    },
-    "seriesEpisode": {
-        "message": "Séries (Episodes)"
-    },
-    "recentWatchtimeProportion": {
-        "message": "Activité récente"
-    },
-    "today": {
-        "message": "Aujourd'hui"
-    },
-    "thisMonth": {
-        "message": "Ce mois-ci"
-    },
-    "thisYear": {
-        "message": "Cette année"
-    },
-    "before": {
-        "message": "Avant"
-    },
-    "years": {
-        "message": "années"
-    },
-    "months": {
-        "message": "mois"
-    },
-    "days": {
-        "message": "jours"
-    },
-    "hours": {
-        "message": "heures"
-    },
-    "minutes": {
-        "message": "minutes"
-    },
-    "seconds": {
-        "message": "secondes"
-    },
-    "and": {
-        "message": "et"
-    },
-    "fetchingPage": {
-        "message": "Obtention de la page $page$ de votre historique Netflix...",
-        "placeholders": {
-            "page": {
-                "content": "$1",
-                "example": "42"
-            }
-        }
-    },
-    "fetchingErrorCheckLoggedIn": {
-        "message": "Une erreur est survenue lors de la récupération de votre historique Netflix.<br>Merci de vérifier que vous êtes bien <a href='https://netflix.com/browse' target='_blank'>connecté à votre compte</a>, puis réessayez."
-    },
-    "somethingBadHappened": {
-        "message": "Quelque chose s'est mal passé lors de la récupération de votre historique Netflix.<br>Regardez les logs pour plus d'informations."
-    },
-    "calculating": {
-        "message": "Calcul en cours sur $allViewedLength$ éléments.",
-        "placeholders": {
-            "allViewedLength": {
-                "content": "$1",
-                "example": "420"
-            }
-        }
-    }
+    "madeBy": { "message": "créé par" }
 }
