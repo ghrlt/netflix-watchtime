@@ -6,6 +6,6 @@ chrome.runtime.onInstalled.addListener(function (object) {
     }
 });
 
-chrome.action.onClicked.addListener(function(tab) {
-    chrome.tabs.create({ url: chrome.runtime.getURL('index.html'), selected: true });
+chrome.action.onClicked.addListener(function (tab) {
+    chrome.tabs.create({ url: chrome.runtime.getURL("index.html"), active: true });
 });

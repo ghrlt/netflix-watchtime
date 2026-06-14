@@ -1,50 +1,70 @@
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Netflix Watchtime / By ghrlt</title>
+        <title>Netflix Watchtime</title>
         <link rel="stylesheet" href="styles.css">
-    </head>	
+    </head>
 
     <body>
-        <div id="content" style="display: none;">
-            <img src="medias/netflix.png" style="max-width: 40%; max-height: 20vh;">
-            <div class="separator">
-                <div></div>
-            </div>
+        <!-- Loading / status screen -->
+        <div id="loader">
+            <img class="brand" src="medias/netflix.png" alt="Netflix">
+            <div class="netflix-loader"></div>
+            <p id="logs" class="text" data-text-key="loading"></p>
+            <div id="progress-wrap"><div id="progress-bar"></div></div>
+        </div>
 
-            <p style="padding-top: 2%;" class="text" data-text-key="youSpent"></p>
-            <span id="total-stat" class="watchtime"></span>
-            <p class="text" data-text-key="watchingNetflixContent"></p>
+        <!-- Error / not-logged-in screen -->
+        <div id="error" style="display:none;">
+            <img class="brand" src="medias/netflix.png" alt="Netflix">
+            <h2 id="error-title"></h2>
+            <p id="error-msg"></p>
+            <button id="retry-btn" class="btn" data-text-key="retry"></button>
+        </div>
 
-            <div style="padding-top: 5rem;"></div>
+        <!-- Dashboard -->
+        <div id="content" style="display:none;">
+            <header class="topbar">
+                <img class="brand" src="medias/netflix.png" alt="Netflix">
+                <span class="wordmark text" data-text-key="watchtime"></span>
+                <span id="profile-name" class="profile-pill"></span>
+            </header>
 
-            <div id="stats">
-                <div class="stat">
-                    <canvas id="timeproportion"></canvas>
+            <section class="hero">
+                <p class="hero-label text" data-text-key="totalWatchtime"></p>
+                <div class="hero-number"><span id="total-stat">—</span></div>
+                <p id="hero-sub" class="hero-sub"></p>
+                <span class="estimate-tag text" data-text-key="accuracyTag"></span>
+            </section>
+
+            <section id="cards" class="cards"></section>
+
+            <section class="charts">
+                <div class="chart-card"><canvas id="contentproportion"></canvas></div>
+                <div class="chart-card"><canvas id="periodproportion"></canvas></div>
+                <div class="chart-card wide"><canvas id="timeline"></canvas></div>
+                <div class="chart-card"><canvas id="hourofday"></canvas></div>
+                <div class="chart-card"><canvas id="dayofweek"></canvas></div>
+                <div class="chart-card">
+                    <h3 class="chart-title text" data-text-key="topSeries"></h3>
+                    <ol id="top-series" class="top-list"></ol>
                 </div>
-                <div class="stat">
-                    <canvas id="hourproportion"></canvas>
-                </div>
-                <div class="stat">
-                    <canvas id="contentproportion"></canvas>
-                </div>
-            </div>
+            </section>
 
-            <div style="position: fixed; bottom: 2rem; width: 100%; display: flex; justify-content: space-around;">
-                <a target="_blank" class="twitter-share-button" id="twitter-share-btn">
-                    <i></i>
+            <footer class="footer">
+                <a id="twitter-share-btn" class="btn share" target="_blank">
                     <span class="text" data-text-key="shareResults"></span>
                 </a>
-            </div>
-        </div>
-        
-        <div id="loader">
-            <div class="netflix-loader"></div>
-            <p id="logs"></p>
+                <p class="credit">
+                    Netflix Watchtime · <span class="text" data-text-key="madeBy"></span>
+                    <a href="https://github.com/ghrlt/netflix-watchtime" target="_blank">ghrlt</a>
+                </p>
+            </footer>
         </div>
     </body>
-    <!--<script src="--countUp.umd.js"></script>-->
-    <script src="chart.js" ></script>
-    <script src="scripts.js" ></script>
-    </html>
+
+    <script src="chart.js"></script>
+    <script src="scripts.js"></script>
+</html>

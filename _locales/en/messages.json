@@ -1,103 +1,73 @@
 {
-    "youSpent": {
-        "message": "You spent"
+    "watchtime": { "message": "Watchtime" },
+    "loading": { "message": "Loading..." },
+    "openingNetflix": { "message": "Opening Netflix..." },
+    "startingAnalysis": { "message": "Starting analysis..." },
+    "fetchingHistory": {
+        "message": "Fetching your history... $done$ / $total$",
+        "placeholders": { "done": { "content": "$1" }, "total": { "content": "$2" } }
     },
-    "watchingNetflixContent": {
-        "message": "watching content on Netflix"
+    "fetchingRuntimes": {
+        "message": "Measuring watch time... $done$ / $total$",
+        "placeholders": { "done": { "content": "$1" }, "total": { "content": "$2" } }
     },
-    "shareResults": {
-        "message": "Share your results!"
+    "retry": { "message": "Try again" },
+
+    "errorTitle": { "message": "Something went wrong" },
+    "errorGeneric": { "message": "We couldn't read your Netflix history. Please try again." },
+    "notLoggedInTitle": { "message": "You're not logged in" },
+    "notLoggedInMsg": { "message": "Please log into Netflix in this browser, then try again." },
+    "apiChangedTitle": { "message": "Netflix changed its API" },
+    "apiChangedMsg": { "message": "Netflix updated its data API and this extension needs an update. Please check for a newer version." },
+    "emptyTitle": { "message": "No viewing history" },
+    "emptyMsg": { "message": "This Netflix profile has no viewing activity yet." },
+
+    "totalWatchtime": { "message": "Total watch time" },
+    "accuracyTag": { "message": "from your real per-title progress — finished titles count in full, in-progress ones count where you stopped" },
+    "heroSub": {
+        "message": "across $count$ titles since $date$",
+        "placeholders": {
+            "count": { "content": "$1", "example": "1240" },
+            "date": { "content": "$2", "example": "Jan 2019" }
+        }
     },
+
+    "hoursWatched": { "message": "Hours watched" },
+    "titlesWatched": { "message": "Titles watched" },
+    "movies": { "message": "Movies" },
+    "episodes": { "message": "Episodes" },
+    "uniqueSeries": { "message": "Series watched" },
+    "daysActive": { "message": "Active days" },
+    "busiestDay": { "message": "Most in one day" },
+
+    "contentProportion": { "message": "Movies vs Episodes" },
+    "periodProportion": { "message": "When you watched" },
+    "activityTimeline": { "message": "Watch time over time" },
+    "byHourOfDay": { "message": "By hour of day" },
+    "byDayOfWeek": { "message": "By day of week" },
+    "topSeries": { "message": "Top series" },
+    "noSeries": { "message": "No series detected" },
+    "episodeShort": { "message": "ep" },
+    "episodesShort": { "message": "eps" },
+
+    "thisWeek": { "message": "This week" },
+    "thisMonth": { "message": "This month" },
+    "thisYear": { "message": "This year" },
+    "older": { "message": "Older" },
+
+    "day": { "message": "day" },
+    "days": { "message": "days" },
+    "hour": { "message": "hour" },
+    "hours": { "message": "hours" },
+    "minute": { "message": "minute" },
+    "minutes": { "message": "minutes" },
+
+    "shareResults": { "message": "Share your results" },
     "shareMessage": {
-        "message": "I%20spent%20$timeSpent$%20on%20Netflix!%0a%0aWanna%20discover%20how%20much%20time%20you%20spent?%0aDownload%20this%20free%20chrome%20extension%20⬇️",
-        "description": "Text placeholder for X (Twitter) sharing button",
+        "message": "I spent $timeSpent$ watching Netflix! Find out yours with the free Netflix Watchtime extension ⬇️",
         "placeholders": {
-            "timeSpent": {
-                "content": "$1",
-                "example": "1 hour"
-            }
+            "timeSpent": { "content": "$1", "example": "12 days 4 hours" }
         }
     },
-    "loading": {
-        "message": "Loading..."
-    },
-    "watchingHoursProportion": {
-        "message": "Watching hours proportion",
-        "description": "Charts title"
-    },
-    "contentProportion": {
-        "message": "Content Type proportion",
-        "description": "Charts title"
-    },
-    "movies": {
-        "message": "Movies"
-    },
-    "series": {
-        "message": "Series"
-    },
-    "seriesEpisode": {
-        "message": "Series (Episode)"
-    },
-    "recentWatchtimeProportion": {
-        "message": "Recent watchtime activity",
-        "description": "Charts title"
-    },
-    "today": {
-        "message": "Today"
-    },
-    "thisMonth": {
-        "message": "This month"
-    },
-    "thisYear": {
-        "message": "This year"
-    },
-    "before": {
-        "message": "Before"
-    },
-    "years": {
-        "message": "years"
-    },
-    "months": {
-        "message": "months"
-    },
-    "days": {
-        "message": "days"
-    },
-    "hours": {
-        "message": "hours"
-    },
-    "minutes": {
-        "message": "minutes"
-    },
-    "seconds": {
-        "message": "seconds"
-    },
-    "and": {
-        "message": "and"
-    },
-    "fetchingPage": {
-        "message": "Fetching page $page$ of your Netflix history...",
-        "description": "Subtitle displayed while fetching Netflix history pages",
-        "placeholders": {
-            "page": {
-                "content": "$1",
-                "example": "42"
-            }
-        }
-    },
-    "fetchingErrorCheckLoggedIn": {
-        "message": "Error fetching your Netflix history.<br>Please check that you are <a href='https://netflix.com/browse' target='_blank'>logged in</a> and try again later."
-    },
-    "somethingBadHappened": {
-        "message": "Something bad happened while fetching your Netflix history.<br>Check the logs for more informations."
-    },
-    "calculating": {
-        "message": "Working on $allViewedLength$ watched content.",
-        "placeholders": {
-            "allViewedLength": {
-                "content": "$1",
-                "example": "420"
-            }
-        }
-    }
+    "madeBy": { "message": "made by" }
 }

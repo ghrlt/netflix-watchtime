@@ -1,49 +1,60 @@
 <img src="https://raw.githubusercontent.com/ghrlt/netflix-watchtime/master/medias/banner.png" alt="A banner featuring the extension logo">
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-![](https://komarev.com/ghpvc/?username=ghrlt-netflix-watchtime&color=brightgreen&label=Repository%20views)  
 
 # Netflix Watchtime
 
-View and get a small analysis of your Netflix watchtime.
-<br>
+See how much time you've **really** spent on Netflix — total watch time, top series,
+when you watch (hour of day, day of week, over the years), movies vs episodes, and more.
 
-Todo: Better analysis, Requests optimization, Global watchtime leaderboard
-<br><br>
+> **v2 — rebuilt for Netflix's current API (2026).**
+> The old endpoint v1 used (`/shakti/<build>/viewingactivity`) was removed, which is why
+> it stopped working. This version reconstructs your **near-exact** watch time from
+> Netflix's current internal APIs — not a flat estimate.
+
+## How watch time is computed
+
+Netflix no longer exposes a single "seconds watched" field, but it still knows, per title:
+its **runtime** and your **bookmark position** (how far you got). So for every entry in
+your history:
+
+- if you finished it (watched ≥ 90 % → past the credits), it counts as the **full runtime**;
+- if you stopped partway (or abandoned it), it counts **only what you actually watched**.
+
+Summed across your whole history, that's your real watch time. Titles you binged to the end
+count fully; the movie you bailed on after 20 minutes only adds 20 minutes.
+
+## How it works (technical)
+
+The dashboard opens your Netflix viewing-activity page in a background tab and, in that
+page's own context (so cookies, CSRF token and CORS are Netflix's own), it:
+
+1. Paginates your full history via the AUI Falcor endpoint
+   (`/api/aui/pathEvaluator` → `["aui","viewingActivity",page,_]`) — video id + exact
+   timestamp + series id per entry.
+2. Looks up `runtime` + `bookmarkPosition` per title via the member Falcor endpoint
+   (`/nq/website/memberapi/release/pathEvaluator` → `["videos",[ids],["runtime",
+   "bookmarkPosition"]]`), batched.
+3. Computes everything **locally**. Nothing is sent anywhere.
+
+A few thousand history items take well under a minute. You must be logged into Netflix in
+the same browser.
 
 ## Installation
 
-Install via the [Chrome Web Store](https://chrome.google.com/webstore/detail/netflix-watchtime/pncajjondflmmdmidcgcahcabjhmabfc)
-
 Install from source:
-- Download the repo -> [here](https://github.com/ghrlt/netflix-watchtime/archive/refs/heads/master.zip)
-- Extract the downloaded ZIP
-- Open your Chromium based browser, and go to chrome://extensions
-- Enable developer mode, and click on "Load unpacked"
-- Select the previously extracted folder
-- Here you go! The extension is now installed. Find its icon on your browser extension bar and click it.
+- Download the repo as a ZIP and extract it.
+- Open your Chromium-based browser and go to `chrome://extensions`.
+- Enable **Developer mode**, click **Load unpacked**, and select the extracted folder.
+- Click the extension's icon to open your dashboard.
 
+## A note on durability
 
-### Adding a traduction
+This relies on Netflix's internal (undocumented) account APIs. If Netflix changes their
+shape, the extension shows a clear "Netflix changed its API" message — the request/response
+formats are documented in `scripts.js` so they're quick to refresh.
 
-Thanks for your interest in this project! Here are the instructions on how to add a traduction:
+## Adding a translation
 
-- Fork the repository
-- Create a new folder under `_locales` named with the locale of your choice ([See supported locales](https://developer.chrome.com/docs/extensions/reference/i18n/#supported-locales))
-- Copy the english [messages.json](https://github.com/ghrlt/netflix-watchtime/blob/master/_locales/en/messages.json) file, and paste it in your folder
-- Modify *all* of the `messages` key values
-    Example:
-    ```json
-    "shareResults": {
-        "message": "Share your results!"
-    }
-    ```
-    this shall became this in the event of a French traduction
-    
-    ```json
-    "shareResults": {
-        "message": "Partagez vos résultats !"
-    }
-    ```
-- Once you're done, commit your local changes and make a pull request!
-    - I will check and push whenenver I can
+Translations live in `_locales/<locale>/messages.json`. Copy `_locales/en/messages.json`,
+translate every `message` value, and open a pull request. (`en` and `fr` ship today.)
