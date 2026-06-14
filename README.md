@@ -4,34 +4,41 @@
 
 # Netflix Watchtime
 
-View and analyse your Netflix watch history — number of titles, movies vs episodes,
-your top series, when you watch, and an **estimated** total watch time.
+See how much time you've **really** spent on Netflix — total watch time, top series,
+when you watch (hour of day, day of week, over the years), movies vs episodes, and more.
 
 > **v2 — rebuilt for Netflix's current API (2026).**
-> The old REST endpoint (`/shakti/<build>/viewingactivity`) the extension relied on was
-> removed, which is why v1 stopped working. Netflix now serves the watch history through
-> its GraphQL API and **no longer exposes how many seconds you watched each title**, so the
-> headline "total watch time" is now an *estimate* based on your number of titles (with
-> adjustable per-title averages). Everything else — counts, trends, top series — is exact.
+> The old endpoint v1 used (`/shakti/<build>/viewingactivity`) was removed, which is why
+> it stopped working. This version reconstructs your **near-exact** watch time from
+> Netflix's current internal APIs — not a flat estimate.
 
-## How it works
+## How watch time is computed
 
-1. Click the toolbar icon to open the dashboard.
-2. The extension opens your Netflix viewing-activity page in a background tab and runs the
-   same GraphQL query Netflix's own "Download all" button uses (so your cookies and CORS
-   just work), then closes the tab.
-3. The history (title + date per entry) is analysed **locally in your browser**. Nothing is
-   sent anywhere.
+Netflix no longer exposes a single "seconds watched" field, but it still knows, per title:
+its **runtime** and your **bookmark position** (how far you got). So for every entry in
+your history:
 
-You need to be logged into Netflix in the same browser.
+- if you finished it (watched ≥ 90 % → past the credits), it counts as the **full runtime**;
+- if you stopped partway (or abandoned it), it counts **only what you actually watched**.
 
-## What you get
+Summed across your whole history, that's your real watch time. Titles you binged to the end
+count fully; the movie you bailed on after 20 minutes only adds 20 minutes.
 
-- **Estimated watch time** — titles × adjustable average minutes (episodes / movies).
-- Titles watched, movies, episodes, unique series, active days, busiest day.
-- Movies vs Episodes, "when you watched" (week/month/year/older), activity over time,
-  and watching by day of the week.
-- Your **top series** by number of episodes.
+## How it works (technical)
+
+The dashboard opens your Netflix viewing-activity page in a background tab and, in that
+page's own context (so cookies, CSRF token and CORS are Netflix's own), it:
+
+1. Paginates your full history via the AUI Falcor endpoint
+   (`/api/aui/pathEvaluator` → `["aui","viewingActivity",page,_]`) — video id + exact
+   timestamp + series id per entry.
+2. Looks up `runtime` + `bookmarkPosition` per title via the member Falcor endpoint
+   (`/nq/website/memberapi/release/pathEvaluator` → `["videos",[ids],["runtime",
+   "bookmarkPosition"]]`), batched.
+3. Computes everything **locally**. Nothing is sent anywhere.
+
+A few thousand history items take well under a minute. You must be logged into Netflix in
+the same browser.
 
 ## Installation
 
@@ -43,10 +50,9 @@ Install from source:
 
 ## A note on durability
 
-The GraphQL query is referenced by a persisted-query id/version
-(`scripts.js` → `GQL_ID` / `GQL_VER`). If Netflix bumps those, the extension shows a clear
-"Netflix changed its API" message and these two constants simply need updating to the
-current values (visible in the request Netflix's own *Download all* button makes).
+This relies on Netflix's internal (undocumented) account APIs. If Netflix changes their
+shape, the extension shows a clear "Netflix changed its API" message — the request/response
+formats are documented in `scripts.js` so they're quick to refresh.
 
 ## Adding a translation
 

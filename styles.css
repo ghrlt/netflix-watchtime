@@ -46,6 +46,21 @@ body {
 @keyframes spin { to { transform: rotate(360deg); } }
 #logs { color: var(--muted); font-size: 1.05rem; }
 
+#progress-wrap {
+    width: min(420px, 70vw);
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    overflow: hidden;
+}
+#progress-bar {
+    height: 100%;
+    width: 0;
+    background: var(--red);
+    border-radius: 999px;
+    transition: width 0.4s ease;
+}
+
 .btn {
     display: inline-block;
     background: var(--red);
