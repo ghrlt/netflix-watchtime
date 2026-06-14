@@ -1,7 +1,7 @@
 {
     "name": "Netflix Watchtime",
-    "description": "View your Netflix watchtime",
-    "version": "1.5.0",
+    "description": "View and analyse your Netflix watch history — titles, trends and estimated watch time.",
+    "version": "2.0.0",
     "manifest_version": 3,
     "author": "Gaëtan Hrlt",
 
@@ -13,14 +13,20 @@
 
     "default_locale": "en",
 
-    "action": {},
+    "action": {
+        "default_title": "Netflix Watchtime"
+    },
 
     "background": {
         "service_worker": "background.js"
     },
 
     "host_permissions": [
-        "https://*.netflix.com/*"
+        "https://*.netflix.com/*",
+        "https://web.prod.cloud.netflix.com/*"
     ],
-    "permissions": []
+    "permissions": [
+        "scripting",
+        "tabs"
+    ]
 }
