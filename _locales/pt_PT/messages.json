@@ -1,0 +1,73 @@
+{
+    "watchtime": { "message": "Tempo de visualização" },
+    "loading": { "message": "A carregar..." },
+    "openingNetflix": { "message": "A abrir a Netflix..." },
+    "startingAnalysis": { "message": "A iniciar a análise..." },
+    "fetchingHistory": {
+        "message": "A obter o seu histórico... $done$ / $total$",
+        "placeholders": { "done": { "content": "$1" }, "total": { "content": "$2" } }
+    },
+    "fetchingRuntimes": {
+        "message": "A calcular o tempo de visualização... $done$ / $total$",
+        "placeholders": { "done": { "content": "$1" }, "total": { "content": "$2" } }
+    },
+    "retry": { "message": "Tentar novamente" },
+
+    "errorTitle": { "message": "Algo correu mal" },
+    "errorGeneric": { "message": "Não foi possível ler o seu histórico da Netflix. Tente novamente." },
+    "notLoggedInTitle": { "message": "Sessão não iniciada" },
+    "notLoggedInMsg": { "message": "Inicie sessão na Netflix neste navegador e tente novamente." },
+    "apiChangedTitle": { "message": "A Netflix alterou a sua API" },
+    "apiChangedMsg": { "message": "A Netflix atualizou a sua API de dados e esta extensão precisa de ser atualizada. Verifique se existe uma versão mais recente." },
+    "emptyTitle": { "message": "Sem histórico" },
+    "emptyMsg": { "message": "Este perfil da Netflix ainda não tem atividade de visualização." },
+
+    "totalWatchtime": { "message": "Tempo total de visualização" },
+    "accuracyTag": { "message": "com base no seu progresso real por título — os títulos terminados contam por completo, os que estão a meio contam onde parou" },
+    "heroSub": {
+        "message": "em $count$ títulos desde $date$",
+        "placeholders": {
+            "count": { "content": "$1", "example": "1240" },
+            "date": { "content": "$2", "example": "jan. 2019" }
+        }
+    },
+
+    "hoursWatched": { "message": "Horas vistas" },
+    "titlesWatched": { "message": "Títulos vistos" },
+    "movies": { "message": "Filmes" },
+    "episodes": { "message": "Episódios" },
+    "uniqueSeries": { "message": "Séries vistas" },
+    "daysActive": { "message": "Dias ativos" },
+    "busiestDay": { "message": "Recorde num dia" },
+
+    "contentProportion": { "message": "Filmes vs Episódios" },
+    "periodProportion": { "message": "Quando viu" },
+    "activityTimeline": { "message": "Tempo de visualização ao longo do tempo" },
+    "byHourOfDay": { "message": "Por hora do dia" },
+    "byDayOfWeek": { "message": "Por dia da semana" },
+    "topSeries": { "message": "Séries mais vistas" },
+    "noSeries": { "message": "Nenhuma série detetada" },
+    "episodeShort": { "message": "ep" },
+    "episodesShort": { "message": "eps" },
+
+    "thisWeek": { "message": "Esta semana" },
+    "thisMonth": { "message": "Este mês" },
+    "thisYear": { "message": "Este ano" },
+    "older": { "message": "Antes" },
+
+    "day": { "message": "dia" },
+    "days": { "message": "dias" },
+    "hour": { "message": "hora" },
+    "hours": { "message": "horas" },
+    "minute": { "message": "minuto" },
+    "minutes": { "message": "minutos" },
+
+    "shareResults": { "message": "Partilhe os seus resultados" },
+    "shareMessage": {
+        "message": "Passei $timeSpent$ a ver Netflix! Descubra o seu com a extensão gratuita Netflix Watchtime ⬇️",
+        "placeholders": {
+            "timeSpent": { "content": "$1", "example": "12 dias 4 horas" }
+        }
+    },
+    "madeBy": { "message": "feito por" }
+}
