@@ -1,5 +1,6 @@
 <img src="https://raw.githubusercontent.com/ghrlt/netflix-watchtime/master/medias/banner.png" alt="A banner featuring the extension logo">
 
+[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Install-e50914?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/netflix-watchtime/pncajjondflmmdmidcgcahcabjhmabfc)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
 # Netflix Watchtime
@@ -42,8 +43,12 @@ the same browser.
 
 ## Installation
 
-Install from source:
-- Download the repo as a ZIP and extract it.
+**[➜ Install from the Chrome Web Store](https://chromewebstore.google.com/detail/netflix-watchtime/pncajjondflmmdmidcgcahcabjhmabfc)** — one click, auto-updates.
+
+<sub>Works in any Chromium browser (Chrome, Brave, Edge, Opera…).</sub>
+
+Or load it from source:
+- Download the repo as a ZIP and extract it (or grab a packaged build from [Releases](https://github.com/ghrlt/netflix-watchtime/releases)).
 - Open your Chromium-based browser and go to `chrome://extensions`.
 - Enable **Developer mode**, click **Load unpacked**, and select the extracted folder.
 - Click the extension's icon to open your dashboard.
