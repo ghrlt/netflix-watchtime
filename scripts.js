@@ -355,6 +355,8 @@ function analyse() {
         total: ITEMS.length,
         movies: 0,
         episodes: 0,
+        movieSecs: 0,
+        episodeSecs: 0,
         watched: 0,
         period: { week: 0, month: 0, year: 0, older: 0 }, // by watched seconds
         byMonth: new Map(),
@@ -369,7 +371,7 @@ function analyse() {
     for (const it of ITEMS) {
         const w = it.watched;
         a.watched += w;
-        if (it.isSeries) a.episodes++; else a.movies++;
+        if (it.isSeries) { a.episodes++; a.episodeSecs += w; } else { a.movies++; a.movieSecs += w; }
         if (it.show) {
             const s = a.shows.get(it.show) || { secs: 0, eps: 0 };
             s.secs += w; s.eps++;
@@ -433,8 +435,18 @@ Chart.defaults.color = "rgba(255,255,255,0.72)";
 Chart.defaults.font.family = "system-ui, -apple-system, Segoe UI, Roboto, sans-serif";
 Chart.defaults.font.size = 13;
 
-const hoursTip = (label) => ({
-    callbacks: { label: (i) => fmtDuration((i.raw || 0)) + (label ? " · " + label : "") },
+const hoursTip = () => ({
+    callbacks: { label: (i) => fmtDuration(i.raw || 0) },
+});
+// doughnut tooltip: "<label>: <duration> (<pct>%)"
+const donutTip = () => ({
+    callbacks: {
+        label: (i) => {
+            const sum = i.dataset.data.reduce((s, v) => s + (v || 0), 0);
+            const pct = sum ? Math.round((i.raw / sum) * 100) : 0;
+            return i.label + ": " + fmtDuration(i.raw || 0) + " (" + pct + "%)";
+        },
+    },
 });
 
 function donut(id, titleKey, labels, data, colors) {
@@ -446,7 +458,7 @@ function donut(id, titleKey, labels, data, colors) {
             plugins: {
                 legend: { position: "bottom", labels: { padding: 14 } },
                 title: { display: true, text: t(titleKey), font: { size: 16, weight: "600" }, padding: { bottom: 12 } },
-                tooltip: hoursTip(),
+                tooltip: donutTip(),
             },
         },
     });
@@ -503,7 +515,7 @@ function render() {
         "&url=" + encodeURIComponent("https://github.com/ghrlt/netflix-watchtime");
 
     donut("contentproportion", "contentProportion",
-        [t("movies"), t("episodes")], [a.movies, a.episodes], [RED, "#b81d24"]);
+        [t("movies"), t("episodes")], [a.movieSecs, a.episodeSecs], ["#f5b500", RED]);
 
     const pWeek = a.period.week;
     const pMonth = Math.max(0, a.period.month - a.period.week);
