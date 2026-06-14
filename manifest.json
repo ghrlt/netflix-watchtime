@@ -1,7 +1,7 @@
 {
     "name": "Netflix Watchtime",
     "description": "View and analyse your Netflix watch history — titles, trends and estimated watch time.",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "manifest_version": 3,
     "author": "Gaëtan Hrlt",
 
@@ -26,6 +26,7 @@
     ],
     "permissions": [
         "scripting",
-        "tabs"
+        "tabs",
+        "storage"
     ]
 }

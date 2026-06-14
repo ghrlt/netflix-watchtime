@@ -29,6 +29,9 @@ const $ = (id) => document.getElementById(id);
 
 let ITEMS = []; // [{ id, date:Date, title, isSeries, show, watched(sec) }]
 let PROFILE = null;
+let LB_WATCHED = 0; // total watched seconds, for the opt-in leaderboard
+
+const LB_API = "https://netflixwatchtime.zlef.fr";
 
 /* ---------------------------------------------------------------- UI helpers */
 
@@ -498,6 +501,7 @@ function render() {
     const a = analyse();
 
     $("total-stat").textContent = fmtDuration(a.watched);
+    LB_WATCHED = a.watched;
     $("hero-sub").textContent = t("heroSub", [String(a.total), a.first ? fmtDate(a.first) : "—"]);
 
     $("cards").innerHTML =
@@ -546,10 +550,87 @@ function render() {
                   `<li><span class="ts-name">${escapeHtml(name)}</span><span class="ts-count">${fmtDuration(s.secs)}</span></li>`)
               .join("")
         : `<li class="muted">${t("noSeries")}</li>`;
+
+    setupLeaderboard();
 }
 
 function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+/* ----------------------------------------------------- opt-in leaderboard */
+// A single number (total watched seconds) under a chosen or anonymous handle.
+// Keyed by a random client id kept in extension storage, so re-submitting just
+// updates your one entry. Nothing else ever leaves the device.
+
+function lbGetClientId() {
+    return new Promise((resolve) => {
+        chrome.storage.local.get(["nwt_lb_id", "nwt_lb_name"], (v) => {
+            let id = v && v.nwt_lb_id;
+            if (!id) {
+                id = (crypto.randomUUID ? crypto.randomUUID() : "id-" + Date.now() + "-" + Math.random().toString(16).slice(2));
+                chrome.storage.local.set({ nwt_lb_id: id });
+            }
+            resolve({ id, name: (v && v.nwt_lb_name) || "" });
+        });
+    });
+}
+
+function lbShowStanding(rank, count, display) {
+    const el = $("lb-result");
+    el.classList.remove("err");
+    el.innerHTML = t("lbStanding", [String(rank), String(count), escapeHtml(display)])
+        .replace(/#(\d+)/, '<span class="rank">#$1</span>');
+    el.style.display = "";
+}
+
+async function setupLeaderboard() {
+    const { id, name } = await lbGetClientId();
+    const input = $("lb-name");
+    const btn = $("lb-join-btn");
+    input.placeholder = t("lbNamePlaceholder");
+    if (name) input.value = name;
+    $("lb-viewall").textContent = t("lbViewAll");
+
+    // show current standing if already on the board
+    fetch(LB_API + "/api/rank?id=" + encodeURIComponent(id))
+        .then((r) => r.json())
+        .then((d) => {
+            if (d && d.rank) {
+                btn.textContent = t("lbUpdateBtn");
+                lbShowStanding(d.rank, d.count, d.entry.display);
+            } else {
+                btn.textContent = t("lbJoinBtn");
+            }
+        })
+        .catch(() => { btn.textContent = t("lbJoinBtn"); });
+
+    btn.onclick = async () => {
+        const nm = input.value.trim();
+        btn.disabled = true;
+        const old = btn.textContent;
+        btn.textContent = t("lbSubmitting");
+        try {
+            const r = await fetch(LB_API + "/api/score", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id, name: nm || null, seconds: Math.round(LB_WATCHED) }),
+            });
+            const d = await r.json();
+            if (!r.ok || !d.rank) throw new Error("bad");
+            chrome.storage.local.set({ nwt_lb_name: nm });
+            lbShowStanding(d.rank, d.count, d.display);
+            btn.textContent = t("lbUpdateBtn");
+        } catch (e) {
+            const el = $("lb-result");
+            el.classList.add("err");
+            el.textContent = t("lbError");
+            el.style.display = "";
+            btn.textContent = old;
+        } finally {
+            btn.disabled = false;
+        }
+    };
 }
 
 /* --------------------------------------------------------------------- boot */
