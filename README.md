@@ -48,6 +48,15 @@ Install from source:
 - Enable **Developer mode**, click **Load unpacked**, and select the extracted folder.
 - Click the extension's icon to open your dashboard.
 
+## Global leaderboard (opt-in)
+
+After your analysis, you can **opt in** to a public watch-time leaderboard at
+**[netflixwatchtime.zlef.fr](https://netflixwatchtime.zlef.fr)** — under a name of your
+choosing or anonymously. Only a single number (your total watch time in seconds) is ever
+sent, keyed by a random id kept in extension storage so re-submitting just updates your
+entry. No history, titles, or account data leaves your device. It's entirely optional and
+there's nothing to submit unless you click the button.
+
 ## A note on durability
 
 This relies on Netflix's internal (undocumented) account APIs. If Netflix changes their

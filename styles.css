@@ -233,6 +233,50 @@ body {
 .ts-count { color: var(--muted); font-size: 0.85rem; flex-shrink: 0; }
 .top-list .muted { color: var(--muted); }
 
+/* ---------- leaderboard CTA ---------- */
+.leaderboard {
+    margin-top: 1.6rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.6rem;
+    text-align: center;
+}
+.lb-title { font-size: 1.3rem; font-weight: 800; margin: 0 0 0.4rem; }
+.lb-sub { color: var(--muted); margin: 0 auto 1.2rem; max-width: 34rem; font-size: 0.95rem; }
+.lb-form {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.lb-form input {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+    font-size: 1rem;
+    width: 16rem;
+    max-width: 70vw;
+}
+.lb-form input:focus { outline: none; border-color: var(--red); }
+.lb-result {
+    margin: 1rem auto 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+.lb-result .rank { color: var(--red); }
+.lb-result.err { color: var(--muted); font-weight: 400; }
+.lb-link {
+    display: inline-block;
+    margin-top: 0.9rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+.lb-link:hover { color: var(--text); }
+
 /* ---------- footer ---------- */
 .footer {
     text-align: center;

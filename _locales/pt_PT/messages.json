@@ -62,6 +62,21 @@
     "minute": { "message": "minuto" },
     "minutes": { "message": "minutos" },
 
+    "lbTitle": { "message": "🏆 Classificação global" },
+    "lbSubtitle": { "message": "Adicione o seu total à classificação pública de tempo de visualização — com o seu nome ou anonimamente." },
+    "lbNamePlaceholder": { "message": "Nome a apresentar (opcional — vazio = anónimo)" },
+    "lbJoinBtn": { "message": "Entrar na classificação" },
+    "lbUpdateBtn": { "message": "Atualizar o meu tempo" },
+    "lbSubmitting": { "message": "A enviar…" },
+    "lbViewAll": { "message": "Ver a classificação completa →" },
+    "lbStanding": {
+        "message": "Está em #$rank$ de $count$ — $display$",
+        "placeholders": {
+            "rank": { "content": "$1" }, "count": { "content": "$2" }, "display": { "content": "$3" }
+        }
+    },
+    "lbError": { "message": "Não foi possível aceder à classificação. Tente novamente." },
+
     "shareResults": { "message": "Partilhe os seus resultados" },
     "shareMessage": {
         "message": "Passei $timeSpent$ a ver Netflix! Descubra o seu com a extensão gratuita Netflix Watchtime ⬇️",

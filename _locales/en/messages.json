@@ -62,6 +62,21 @@
     "minute": { "message": "minute" },
     "minutes": { "message": "minutes" },
 
+    "lbTitle": { "message": "🏆 Global leaderboard" },
+    "lbSubtitle": { "message": "Add your total to the public watch-time leaderboard — as yourself or anonymously." },
+    "lbNamePlaceholder": { "message": "Display name (optional — blank = anonymous)" },
+    "lbJoinBtn": { "message": "Join the leaderboard" },
+    "lbUpdateBtn": { "message": "Update my time" },
+    "lbSubmitting": { "message": "Submitting…" },
+    "lbViewAll": { "message": "View the full leaderboard →" },
+    "lbStanding": {
+        "message": "You're #$rank$ of $count$ — $display$",
+        "placeholders": {
+            "rank": { "content": "$1" }, "count": { "content": "$2" }, "display": { "content": "$3" }
+        }
+    },
+    "lbError": { "message": "Couldn't reach the leaderboard. Try again." },
+
     "shareResults": { "message": "Share your results" },
     "shareMessage": {
         "message": "I spent $timeSpent$ watching Netflix! Find out yours with the free Netflix Watchtime extension ⬇️",
