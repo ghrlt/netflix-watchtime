@@ -20,8 +20,9 @@
  */
 
 const FINISHED_RATIO = 0.9; // watched >= 90% of runtime => counts as fully watched
-const PAGE_THROTTLE_MS = 120;
-const META_CHUNK = 200;
+const HISTORY_CONCURRENCY = 12; // parallel history-page fetches (feed is 20 items/page)
+const META_CONCURRENCY = 6; // parallel runtime/bookmark batch fetches
+const META_CHUNK = 200; // video ids per runtime/bookmark request
 
 const t = (key, subs) => chrome.i18n.getMessage(key, subs) || key;
 const $ = (id) => document.getElementById(id);
@@ -129,49 +130,72 @@ async function runPipeline(cfg) {
         return (j.jsonGraph && j.jsonGraph.videos) || {};
     }
 
-    // --- 1. paginate full history ---
-    let all = [];
+    // small helpers: retry transient failures, run tasks with bounded concurrency
+    async function withRetry(fn, tries = 3) {
+        for (let a = 0; a < tries; a++) {
+            try { return await fn(); }
+            catch (e) { if (a === tries - 1) throw e; await sleep(300 * (a + 1)); }
+        }
+    }
+    async function runPool(list, concurrency, fn) {
+        let i = 0;
+        const n = Math.max(1, Math.min(concurrency, list.length || 1));
+        await Promise.all(Array.from({ length: n }, async () => {
+            while (true) {
+                const idx = i++;
+                if (idx >= list.length) break;
+                await fn(list[idx]);
+            }
+        }));
+    }
+
+    // --- 1. paginate full history (page 0 first to learn the total, then in parallel) ---
+    const all = [];
     let vhSize = null;
     let profileName = null;
-    try {
-        for (let pg = 0; pg < 2000; pg++) {
-            const v = await vaPage(pg);
-            if (vhSize == null && typeof v.vhSize === "number") vhSize = v.vhSize;
-            if (pg === 0 && v.profileInfo) profileName = v.profileInfo.profileName || null;
-            const items = v.viewedItems || [];
-            if (!items.length) break;
-            all.push(...items);
-            report("history", all.length, vhSize || all.length);
-            if (vhSize != null && all.length >= vhSize) break;
-            await sleep(cfg.pageThrottle);
-        }
-    } catch (e) {
-        if (!all.length) return { error: "API_ERROR", detail: String(e) };
-        // partial history is still usable
+    let v0;
+    try { v0 = await withRetry(() => vaPage(0)); }
+    catch (e) { return { error: "API_ERROR", detail: String(e) }; }
+    if (typeof v0.vhSize === "number") vhSize = v0.vhSize;
+    if (v0.profileInfo) profileName = v0.profileInfo.profileName || null;
+    const page0 = v0.viewedItems || [];
+    all.push(...page0);
+    report("history", all.length, vhSize || all.length);
+
+    const pageLen = page0.length || 20;
+    if (vhSize != null && all.length < vhSize) {
+        const totalPages = Math.ceil(vhSize / pageLen);
+        const pages = [];
+        for (let pg = 1; pg < totalPages; pg++) pages.push(pg);
+        await runPool(pages, cfg.concurrency, async (pg) => {
+            let v = null;
+            try { v = await withRetry(() => vaPage(pg)); } catch (e) {}
+            if (v && v.viewedItems && v.viewedItems.length) all.push(...v.viewedItems);
+            report("history", all.length, vhSize);
+        });
     }
     if (!all.length) return { error: "EMPTY" };
 
-    // --- 2. runtime + bookmark per unique video ---
+    // --- 2. runtime + bookmark per unique video (batched, in parallel) ---
     const ids = [...new Set(all.map((x) => x.movieID))];
     const meta = {};
-    for (let i = 0; i < ids.length; i += cfg.metaChunk) {
-        const chunk = ids.slice(i, i + cfg.metaChunk);
-        try {
-            const v = await metaChunk(chunk);
-            for (const id of chunk) {
-                const node = v[id];
-                if (!node) continue;
-                meta[id] = {
-                    runtime: node.runtime && typeof node.runtime.value === "number" ? node.runtime.value : null,
-                    bookmark: node.bookmarkPosition && typeof node.bookmarkPosition.value === "number" ? node.bookmarkPosition.value : null,
-                };
-            }
-        } catch (e) {
-            /* skip this chunk's runtimes; items fall back below */
+    const chunks = [];
+    for (let i = 0; i < ids.length; i += cfg.metaChunk) chunks.push(ids.slice(i, i + cfg.metaChunk));
+    let metaDone = 0;
+    await runPool(chunks, cfg.metaConcurrency, async (chunk) => {
+        let v = {};
+        try { v = await withRetry(() => metaChunk(chunk)); } catch (e) {}
+        for (const id of chunk) {
+            const node = v[id];
+            if (!node) continue;
+            meta[id] = {
+                runtime: node.runtime && typeof node.runtime.value === "number" ? node.runtime.value : null,
+                bookmark: node.bookmarkPosition && typeof node.bookmarkPosition.value === "number" ? node.bookmarkPosition.value : null,
+            };
         }
-        report("meta", Math.min(i + cfg.metaChunk, ids.length), ids.length);
-        await sleep(cfg.pageThrottle);
-    }
+        metaDone += chunk.length;
+        report("meta", Math.min(metaDone, ids.length), ids.length);
+    });
 
     // --- 3. assemble ---
     const items = all.map((x) => {
@@ -239,7 +263,7 @@ async function fetchHistory() {
             target: { tabId: tab.id },
             world: "MAIN",
             func: runPipeline,
-            args: [{ pageThrottle: PAGE_THROTTLE_MS, metaChunk: META_CHUNK }],
+            args: [{ concurrency: HISTORY_CONCURRENCY, metaConcurrency: META_CONCURRENCY, metaChunk: META_CHUNK }],
         });
         stopProgressPoll();
         const result = injection && injection[0] && injection[0].result;
