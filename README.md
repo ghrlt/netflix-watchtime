@@ -57,4 +57,5 @@ formats are documented in `scripts.js` so they're quick to refresh.
 ## Adding a translation
 
 Translations live in `_locales/<locale>/messages.json`. Copy `_locales/en/messages.json`,
-translate every `message` value, and open a pull request. (`en` and `fr` ship today.)
+translate every `message` value, and open a pull request. (`en`, `fr`, `pt_BR` and `pt_PT`
+ship today.)
