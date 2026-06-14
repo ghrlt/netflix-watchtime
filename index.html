@@ -13,6 +13,7 @@
             <img class="brand" src="medias/netflix.png" alt="Netflix">
             <div class="netflix-loader"></div>
             <p id="logs" class="text" data-text-key="loading"></p>
+            <div id="progress-wrap"><div id="progress-bar"></div></div>
         </div>
 
         <!-- Error / not-logged-in screen -->
@@ -32,26 +33,10 @@
             </header>
 
             <section class="hero">
-                <p class="hero-label text" data-text-key="estimatedTotal"></p>
+                <p class="hero-label text" data-text-key="totalWatchtime"></p>
                 <div class="hero-number"><span id="total-stat">—</span></div>
                 <p id="hero-sub" class="hero-sub"></p>
-                <span class="estimate-tag text" data-text-key="estimateTag"></span>
-            </section>
-
-            <section class="controls">
-                <p class="controls-note text" data-text-key="estimateNote"></p>
-                <div class="controls-row">
-                    <label>
-                        <span class="text" data-text-key="avgEpisode"></span>
-                        <input type="number" id="avg-episode" min="1" max="600" value="35">
-                        <span class="unit text" data-text-key="minutes"></span>
-                    </label>
-                    <label>
-                        <span class="text" data-text-key="avgMovie"></span>
-                        <input type="number" id="avg-movie" min="1" max="600" value="100">
-                        <span class="unit text" data-text-key="minutes"></span>
-                    </label>
-                </div>
+                <span class="estimate-tag text" data-text-key="accuracyTag"></span>
             </section>
 
             <section id="cards" class="cards"></section>
@@ -60,6 +45,7 @@
                 <div class="chart-card"><canvas id="contentproportion"></canvas></div>
                 <div class="chart-card"><canvas id="periodproportion"></canvas></div>
                 <div class="chart-card wide"><canvas id="timeline"></canvas></div>
+                <div class="chart-card"><canvas id="hourofday"></canvas></div>
                 <div class="chart-card"><canvas id="dayofweek"></canvas></div>
                 <div class="chart-card">
                     <h3 class="chart-title text" data-text-key="topSeries"></h3>

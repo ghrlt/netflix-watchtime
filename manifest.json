@@ -22,8 +22,7 @@
     },
 
     "host_permissions": [
-        "https://*.netflix.com/*",
-        "https://web.prod.cloud.netflix.com/*"
+        "https://*.netflix.com/*"
     ],
     "permissions": [
         "scripting",

@@ -2,7 +2,15 @@
     "watchtime": { "message": "Temps de visionnage" },
     "loading": { "message": "Chargement..." },
     "openingNetflix": { "message": "Ouverture de Netflix..." },
-    "readingHistory": { "message": "Lecture de votre historique..." },
+    "startingAnalysis": { "message": "Lancement de l'analyse..." },
+    "fetchingHistory": {
+        "message": "Récupération de votre historique... $done$ / $total$",
+        "placeholders": { "done": { "content": "$1" }, "total": { "content": "$2" } }
+    },
+    "fetchingRuntimes": {
+        "message": "Calcul du temps de visionnage... $done$ / $total$",
+        "placeholders": { "done": { "content": "$1" }, "total": { "content": "$2" } }
+    },
     "retry": { "message": "Réessayer" },
 
     "errorTitle": { "message": "Une erreur est survenue" },
@@ -14,8 +22,8 @@
     "emptyTitle": { "message": "Aucun historique" },
     "emptyMsg": { "message": "Ce profil Netflix n'a aucune activité de visionnage." },
 
-    "estimatedTotal": { "message": "Temps de visionnage estimé" },
-    "estimateTag": { "message": "estimation — Netflix ne fournit plus les durées exactes" },
+    "totalWatchtime": { "message": "Temps de visionnage total" },
+    "accuracyTag": { "message": "d'après votre progression réelle par titre — les titres terminés comptent en entier, ceux en cours là où vous vous êtes arrêté" },
     "heroSub": {
         "message": "sur $count$ titres depuis $date$",
         "placeholders": {
@@ -23,12 +31,8 @@
             "date": { "content": "$2", "example": "janv. 2019" }
         }
     },
-    "estimateNote": {
-        "message": "Netflix ne communique plus la durée réellement regardée pour chaque titre : le temps total est donc estimé à partir du nombre de titres. Ajustez les moyennes par titre ci-dessous selon vos habitudes."
-    },
-    "avgEpisode": { "message": "Moy. par épisode" },
-    "avgMovie": { "message": "Moy. par film" },
 
+    "hoursWatched": { "message": "Heures regardées" },
     "titlesWatched": { "message": "Titres regardés" },
     "movies": { "message": "Films" },
     "episodes": { "message": "Épisodes" },
@@ -38,7 +42,8 @@
 
     "contentProportion": { "message": "Films vs Épisodes" },
     "periodProportion": { "message": "Quand vous regardez" },
-    "activityTimeline": { "message": "Activité dans le temps" },
+    "activityTimeline": { "message": "Temps de visionnage dans le temps" },
+    "byHourOfDay": { "message": "Par heure de la journée" },
     "byDayOfWeek": { "message": "Par jour de la semaine" },
     "topSeries": { "message": "Séries les plus vues" },
     "noSeries": { "message": "Aucune série détectée" },
